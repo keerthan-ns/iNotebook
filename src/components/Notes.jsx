@@ -19,7 +19,6 @@ export default function Notes() {
 
     const [note, setNote] = useState({id:"",etitle:"",edescription:"",etag:""})
     const handleClick=(e)=>{
-        // console.log(note)
         // e.preventDefault()
         editNote(note.id,note.etitle,note.edescription,note.etag)
         toggleBtn.current.click() 
