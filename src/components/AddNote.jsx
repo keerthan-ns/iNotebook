@@ -5,11 +5,12 @@ import noteContext from "../context/notes/noteContext";
 export default function AddNote() {
   const context = useContext(noteContext)
   const {addNote} = context
-  const [note, setNote] = useState({title:"",decription:"",tag:""})
+  const [note, setNote] = useState({title:"",description:"",tag:""})
 
   const handleClick=(e)=>{
     e.preventDefault()
     addNote(note.title,note.description,note.tag)
+    setNote({title:"",description:"",tag:""})
   }
 
   const handleChange=(e)=>{
@@ -30,25 +31,21 @@ export default function AddNote() {
             <div className="mb-2 block">
               <Label htmlFor="title" value="Title : " />
             </div>
-            <TextInput id="title" placeholder="Enter the notes title" required type="text" onChange={handleChange}/>
+            <TextInput id="title" placeholder="Enter the notes title" minLength={3} value={note.title} required type="text" onChange={handleChange}/>
           </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="description" value="Description : " />
             </div>
-            <Textarea id="description" rows={2} placeholder="Enter the notes description" required onChange={handleChange}/>
+            <Textarea id="description" rows={2} placeholder="Enter the notes description" className="text-sm" value={note.description} minLength={6} required onChange={handleChange}/>
           </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="tag" value="Tag : " />
             </div>
-            <TextInput id="tag" placeholder="Enter the notes tag" type="text" onChange={handleChange}/>
+            <TextInput id="tag" placeholder="Enter the notes tag" type="text" value={note.tag} onChange={handleChange}/>
           </div>
-          {/* <div className="flex items-center gap-2">
-            <Checkbox id="remember" />
-            <Label htmlFor="remember">Remember me</Label>
-          </div> */}
-          <Button type="submit" className="bg-pink-600" onClick={handleClick}>Submit</Button>
+          <Button disabled={note.title.length<3 || note.description.length<6} type="submit" className="disabled:bg-pink-300 disabled:text-black bg-pink-600" onClick={handleClick}>Add note</Button>
         </form>
       </div>
   )
