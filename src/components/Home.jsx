@@ -1,10 +1,7 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import { useContext } from "react";
-import noteContext from "../context/notes/noteContext";
+import Notes from "./Notes";
 
 export default function Home() {
-  const context = useContext(noteContext)
-  const {notes, setNotes} = context
   return (
     <>
       <div className="flex flex-col px-6">
@@ -33,18 +30,8 @@ export default function Home() {
           <Button type="submit" className="bg-pink-600">Submit</Button>
         </form>
       </div>
-      <div className="mt-4 flex flex-col px-6">
-        <h1 className="text-3xl font-bold text-blue-300 after:content-['_notes']">
-          <span className="underline underline-offset-8 decoration-7 decoration-pink-600">
-            Your
-          </span>
-        </h1>
-        {
-          notes.map((note)=>{
-            return note.title
-          })
-        }
-      </div>
+      {/* notes are rendered using Notes concept */}
+      <Notes/>
     </>
   );
 }
