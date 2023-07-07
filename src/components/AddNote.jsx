@@ -1,8 +1,8 @@
 import { Button, Label, TextInput, Textarea } from "flowbite-react"
-import { useContext, useState } from "react";
-import noteContext from "../context/notes/noteContext";
+import { useContext, useState } from "react"
+import noteContext from "../context/notes/noteContext"
 import PropTypes from "prop-types"
-import Spinner from "./Spinner";
+import Spinner from "./Spinner"
 
 export default function AddNote(props) {
   const context = useContext(noteContext)

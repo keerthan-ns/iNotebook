@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import noteContext from "../context/notes/noteContext";
-import { useContext } from "react";
+import noteContext from "../context/notes/noteContext"
+import { useContext } from "react"
 
 export default function NoteItem(props) {
     const {note,updateNote} = props;

@@ -1,11 +1,11 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import noteContext from "../context/notes/noteContext";
-import NoteItem from "./NoteItem";
-import AddNote from "./AddNote";
+import { useContext, useEffect, useRef, useState } from "react"
+import noteContext from "../context/notes/noteContext"
+import NoteItem from "./NoteItem"
+import AddNote from "./AddNote"
 import { Button, Label, TextInput, Textarea } from "flowbite-react"
 import PropTypes from "prop-types"
-import { useNavigate } from "react-router-dom";
-import Spinner from "./Spinner";
+import { useNavigate } from "react-router-dom"
+import Spinner from "./Spinner"
 
 export default function Notes(props) {
     let navigate = useNavigate()

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import NoteContext from "./noteContext";
+import { useState } from "react"
+import NoteContext from "./noteContext"
 import PropTypes from 'prop-types'
 
 const NoteState = (props) =>{
