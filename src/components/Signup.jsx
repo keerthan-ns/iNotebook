@@ -6,6 +6,18 @@ import PropTypes from "prop-types"
 export default function Signup(props) {
     let navigate = useNavigate()
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
+    const getUserInfo=async()=>{
+        const response = await fetch("http://localhost:5000/api/auth/getuser",{
+            method:'POST',
+            headers:{
+                'Content-type':'application/json',
+                'auth-token': localStorage.getItem("token")
+            },
+        })
+        const json = await response.json()
+        localStorage.setItem("name",json.name)
+        localStorage.setItem("email",json.email)
+    }
     const handleSubmit=async (e)=>{
         e.preventDefault()
         const response = await fetch("http://localhost:5000/api/auth/createuser",{
@@ -18,7 +30,7 @@ export default function Signup(props) {
         const json = await response.json()
         if(json.success){
             localStorage.setItem("token",json.authtoken)
-            console.log(json.authtoken)
+            await getUserInfo()
             navigate('/')
             props.showAlert("Success","iNotebook account created")
         }

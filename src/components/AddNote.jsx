@@ -2,17 +2,21 @@ import { Button, Label, TextInput, Textarea } from "flowbite-react"
 import { useContext, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import PropTypes from "prop-types"
+import Spinner from "./Spinner";
 
 export default function AddNote(props) {
   const context = useContext(noteContext)
   const {addNote} = context
+  const [addingNote, setAddingNote] = useState(false)
   const [note, setNote] = useState({title:"",description:"",tag:""})
 
   const handleClick=async (e)=>{
+    setAddingNote(true)
     e.preventDefault()
     await addNote(note.title,note.description,note.tag)
     setNote({title:"",description:"",tag:""})
     props.showAlert("Success","New note added !")
+    setAddingNote(false)
   }
 
   const handleChange=(e)=>{
@@ -47,7 +51,7 @@ export default function AddNote(props) {
             </div>
             <TextInput id="tag" placeholder="Enter the notes tag" type="text" value={note.tag} onChange={handleChange}/>
           </div>
-          <Button disabled={note.title.length<3 || note.description.length<6} type="submit" className="disabled:bg-pink-300 disabled:text-black bg-pink-600" onClick={handleClick}>Add note</Button>
+          <Button disabled={note.title.length<3 || note.description.length<6 || note.tag.length<2} type="submit" className="disabled:bg-pink-300 disabled:text-black bg-pink-600" onClick={handleClick}>{addingNote && <Spinner size={"4"}/>}Add note</Button>
         </form>
       </div>
   )
