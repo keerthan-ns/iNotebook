@@ -1,10 +1,14 @@
 import {Link,useLocation} from 'react-router-dom'
 
 export default function Navbar() {
-    let location = useLocation();
+    let location = useLocation()
     
     const toggleNavbar=()=>{
         document.getElementById('navbar-Compo').classList.toggle("hidden");
+    }
+    const handleLogout =()=>{
+        localStorage.removeItem("token")
+        window.location.reload()
     }
     return (
         <>
@@ -28,29 +32,31 @@ export default function Navbar() {
                             <li>
                                 <Link to="/about" onClick={toggleNavbar} className={`block py-2 pl-3 pr-4 ${location.pathname==="/about"?"text-pink-600 font-bold":"text-white"} hover:text-pink-600 hover:font-semibold`}>About</Link>{/* <Link to="/about" onClick={toggleNavbar} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</Link> */}
                             </li>
-                            <li className='flex justify-between'>
-                                <Link to="/login" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</Link>
-                                <Link to="/signup" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Signup</Link>
-                            </li>
-                            {/* <li>     
-                                <div className="flex items-center justify-end md:order-2">
-                                    <button type="button" className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                                        <span className="sr-only">Open user menu</span>
-                                        <img className="w-8 h-8 rounded-full" src="/userIcon.png" alt="user photo"/>
-                                    </button>
-                                    <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-                                        <div className="px-4 py-3">
-                                        <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                                        <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                            {!localStorage.getItem("token")?
+                                <li className='flex justify-between'>
+                                    <Link to="/login" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</Link>
+                                    <Link to="/signup" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Signup</Link>
+                                </li>:
+                                <li>     
+                                    <div className="flex items-center justify-end md:order-2">
+                                        <button type="button" className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                                            <span className="sr-only">Open user menu</span>
+                                            <img className="w-8 h-8 rounded-full" src="/userIcon.png" alt="user photo"/>
+                                        </button>
+                                        <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                                            <div className="px-4 py-3">
+                                            <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                                            <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                                            </div>
+                                            <ul className="py-2" aria-labelledby="user-menu-button">
+                                                <li>
+                                                    <Link onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</Link>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <ul className="py-2" aria-labelledby="user-menu-button">
-                                            <li>
-                                                <a href="#" onClick={toggleNavbar} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-                                            </li>
-                                        </ul>
                                     </div>
-                                </div>
-                            </li> */}
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>

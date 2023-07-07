@@ -1,8 +1,6 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Button, Label, TextInput } from 'flowbite-react'
-import Alert from './Alert'
-import { render } from 'react-dom'
 import PropTypes from "prop-types"
 
 export default function Login(props) {

@@ -4,12 +4,17 @@ import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
 import { Button, Label, TextInput, Textarea } from "flowbite-react"
 import PropTypes from "prop-types"
+import { useNavigate } from "react-router-dom";
 
 export default function Notes(props) {
+    let navigate = useNavigate()
     const context = useContext(noteContext)
     const {notes,getNotes,editNote} = context
     useEffect(() => {
-      getNotes()
+        if(localStorage.getItem("token"))
+            getNotes()
+        else
+            navigate('/login')
     }, [])
     
     const toggleBtn = useRef(null)
@@ -19,7 +24,7 @@ export default function Notes(props) {
     }
     
     const [note, setNote] = useState({id:"",etitle:"",edescription:"",etag:""})
-    const handleClick=async (e)=>{
+    const handleClick=async ()=>{
         // e.preventDefault()
         await editNote(note.id,note.etitle,note.edescription,note.etag)
         toggleBtn.current.click() 
