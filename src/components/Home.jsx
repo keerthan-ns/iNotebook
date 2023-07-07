@@ -1,10 +1,13 @@
 import Notes from "./Notes";
+import PropTypes from "prop-types"
 
-export default function Home() {
+export default function Home(props) {
   return (
     <>
-      {/* notes are rendered using Notes concept */}
-      <Notes/>
+      <Notes showAlert={props.showAlert}/>
     </>
   );
+}
+Home.propTypes = {
+  showAlert: PropTypes.func,
 }

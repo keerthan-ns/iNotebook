@@ -3,8 +3,9 @@ import noteContext from "../context/notes/noteContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
 import { Button, Label, TextInput, Textarea } from "flowbite-react"
+import PropTypes from "prop-types"
 
-export default function Notes() {
+export default function Notes(props) {
     const context = useContext(noteContext)
     const {notes,getNotes,editNote} = context
     useEffect(() => {
@@ -16,12 +17,13 @@ export default function Notes() {
         toggleBtn.current.click() 
         setNote({id: currentNote._id,etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag})
     }
-
+    
     const [note, setNote] = useState({id:"",etitle:"",edescription:"",etag:""})
-    const handleClick=(e)=>{
+    const handleClick=async (e)=>{
         // e.preventDefault()
-        editNote(note.id,note.etitle,note.edescription,note.etag)
+        await editNote(note.id,note.etitle,note.edescription,note.etag)
         toggleBtn.current.click() 
+        props.showAlert("Success","Note updated")
     }
 
     const handleChange=(e)=>{
@@ -33,7 +35,7 @@ export default function Notes() {
     
     return (
         <>
-            <AddNote/>
+            <AddNote showAlert={props.showAlert}/>
             <button ref={toggleBtn} data-modal-target="updatenote-modal" data-modal-toggle="updatenote-modal" className="hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                 Toggle modal
             </button>
@@ -93,7 +95,7 @@ export default function Notes() {
                     <div className="mt-4 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-2">
                         {
                             notes.map((note,i)=>{
-                                return <NoteItem key={i} updateNote={updateNote} note={note}/>
+                                return <NoteItem key={i} updateNote={updateNote} note={note} showAlert={props.showAlert}/>
                             })
                         }
                     </div>
@@ -101,3 +103,7 @@ export default function Notes() {
         </>
     )
 }
+Notes.propTypes = {
+    showAlert: PropTypes.func,
+}
+  

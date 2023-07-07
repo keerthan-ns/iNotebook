@@ -14,7 +14,7 @@ export default function NoteItem(props) {
                 <p className="font-normal text-gray-700 dark:text-gray-400 line-clamp-2">{note.description}</p>
                 <div className='mt-2 flex flex-row justify-left items-center gap-4'>
                     <i className="cursor-pointer fa-solid fa-pen text-[#45e766] text-lg" onClick={()=>{updateNote(note)}}></i>
-                    <i className="cursor-pointer fa-solid fa-trash text-[#eb1010] text-lg" onClick={()=>{deleteNote(note._id)}}></i>
+                    <i className="cursor-pointer fa-solid fa-trash text-[#eb1010] text-lg" onClick={()=>{deleteNote(note._id); props.showAlert("Success","Note deleted")}}></i>
                 </div>
             </div>
         </>
@@ -30,4 +30,5 @@ NoteItem.propTypes = {
         description: PropTypes.string.isRequired,
     }),
     updateNote: PropTypes.func,
+    showAlert: PropTypes.func,
 }

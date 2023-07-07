@@ -1,16 +1,18 @@
 import { Button, Label, TextInput, Textarea } from "flowbite-react"
 import { useContext, useState } from "react";
 import noteContext from "../context/notes/noteContext";
+import PropTypes from "prop-types"
 
-export default function AddNote() {
+export default function AddNote(props) {
   const context = useContext(noteContext)
   const {addNote} = context
   const [note, setNote] = useState({title:"",description:"",tag:""})
 
-  const handleClick=(e)=>{
+  const handleClick=async (e)=>{
     e.preventDefault()
-    addNote(note.title,note.description,note.tag)
+    await addNote(note.title,note.description,note.tag)
     setNote({title:"",description:"",tag:""})
+    props.showAlert("Success","New note added !")
   }
 
   const handleChange=(e)=>{
@@ -49,4 +51,8 @@ export default function AddNote() {
         </form>
       </div>
   )
+}
+
+AddNote.propTypes = {
+  showAlert: PropTypes.func,
 }

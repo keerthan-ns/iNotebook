@@ -15,6 +15,7 @@ router.post('/createuser',[
         body('email',"Enter a valid email").isEmail(),
         body('password',"Min password length must be 6").isLength({ min: 6 })
     ],async (req,res)=>{
+        let success = false
         // if there are errors, return errors
         const errors = validationResult(req)
         if(!errors.isEmpty())
@@ -23,7 +24,7 @@ router.post('/createuser',[
         try{    
             let user =await User.findOne({email: req.body.email})
             if(user)
-                return res.status(400).json({error:"Account with this email already exists"})
+                return res.status(400).json({success,error:"Account with this email already exists"})
             const salt = await bcrypt.genSalt(10);
             const secPass = await bcrypt.hash(req.body.password, salt)
             // create new user with await
@@ -39,8 +40,9 @@ router.post('/createuser',[
             }
             // jsonwebtoken
             const authtoken = jwt.sign(data,JWT_SECRET)
+            success = true
             // new user stored is returned back
-            res.json({authtoken: authtoken})
+            res.json({success,authtoken: authtoken})
             // res.json(user)
         }catch(error){
             // other errors are handled here
@@ -55,6 +57,7 @@ router.post('/login',[
     body('email',"Enter a valid email").isEmail(),
     body('password',"Password cannot be blank").exists()
 ],async (req,res)=>{
+    let success = false
     // if there are errors, return errors
     const errors = validationResult(req)
     if(!errors.isEmpty())
@@ -76,8 +79,9 @@ router.post('/login',[
             }
             // jsonwebtoken
             const authtoken = jwt.sign(data,JWT_SECRET)
+            success = true
             // new user stored is returned back
-            res.json({authtoken: authtoken})
+            res.json({success,authtoken: authtoken})
     }catch(error){
         // other errors are handled here
         console.log(error.message)
