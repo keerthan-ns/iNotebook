@@ -15,7 +15,8 @@ export default function Notes(props) {
             getNotes()
         else
             navigate('/login')
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     
     const toggleBtn = useRef(null)
     const updateNote = (currentNote) =>{
