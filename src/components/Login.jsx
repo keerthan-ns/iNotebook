@@ -2,9 +2,11 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Button, Label, TextInput } from 'flowbite-react'
 import PropTypes from "prop-types"
+import Spinner from './Spinner'
 
 export default function Login(props) {
     let navigate = useNavigate()
+    const [logging, setLogging] = useState(false)
     const [credentials, setCredentials] = useState({email:"",password:""})
     const getUserInfo=async()=>{
         console.log(localStorage.getItem("token"))
@@ -21,6 +23,7 @@ export default function Login(props) {
         localStorage.setItem("email",json.email)
     }
     const handleSubmit=async (e)=>{
+        setLogging(true)
         e.preventDefault()
         const response = await fetch("http://localhost:5000/api/auth/login",{
             method:'POST',
@@ -37,7 +40,8 @@ export default function Login(props) {
             props.showAlert("Success","You are logged in")
         }
         else
-        props.showAlert("Failed",json.error)
+            props.showAlert("Failed",json.error)
+        setLogging(false)
     }
     const handleChange=(e)=>{
         setCredentials({
@@ -66,7 +70,7 @@ export default function Login(props) {
                     <TextInput onChange={handleChange} value={credentials.password} id="password" name="password" required type="password"/>
                 </div>
                 <Button type="submit" className="mt-2 bg-pink-600">
-                    Login
+                    {logging && <Spinner size={"4"}/>}Login
                 </Button>
             </form>
         </div>

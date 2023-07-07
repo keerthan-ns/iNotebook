@@ -2,9 +2,11 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Button, Label, TextInput } from 'flowbite-react'
 import PropTypes from "prop-types"
+import Spinner from './Spinner'
 
 export default function Signup(props) {
     let navigate = useNavigate()
+    const [signing, setSigning] = useState(false)
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
     const getUserInfo=async()=>{
         const response = await fetch("http://localhost:5000/api/auth/getuser",{
@@ -19,6 +21,7 @@ export default function Signup(props) {
         localStorage.setItem("email",json.email)
     }
     const handleSubmit=async (e)=>{
+        setSigning(true)
         e.preventDefault()
         const response = await fetch("http://localhost:5000/api/auth/createuser",{
             method:'POST',
@@ -28,14 +31,17 @@ export default function Signup(props) {
             body: JSON.stringify({name:credentials.name,email: credentials.email,password: credentials.password})
         })
         const json = await response.json()
+        console.log(json)
         if(json.success){
             localStorage.setItem("token",json.authtoken)
             await getUserInfo()
             navigate('/')
             props.showAlert("Success","iNotebook account created")
         }
-        else
+        else{
             props.showAlert("Error",json.error)
+        }
+        setSigning(false)
     }
     const handleChange=(e)=>{
         setCredentials({
@@ -55,7 +61,7 @@ export default function Signup(props) {
                     <div className="mb-2 block">
                         <Label htmlFor="name" value="Enter your name" />
                     </div>
-                    <TextInput onChange={handleChange} value={credentials.name} id="name" name="name" placeholder="Thor tate" required type="text" />
+                    <TextInput onChange={handleChange} value={credentials.name} minLength={3} id="name" name="name" placeholder="Thor tate" required type="text" />
                 </div>
                 <div>
                     <div className="mb-2 block">
@@ -67,10 +73,10 @@ export default function Signup(props) {
                     <div className="mb-2 block">
                         <Label htmlFor="password" value="Create password"/>
                     </div>
-                    <TextInput onChange={handleChange} value={credentials.password} id="password" name="password" required type="password"/>
+                    <TextInput onChange={handleChange} value={credentials.password} minLength={6} id="password" name="password" required type="password"/>
                 </div>
                 <Button type="submit" className="mt-2 bg-pink-600">
-                    Signup
+                    {signing && <Spinner size={"4"}/>}Signup
                 </Button>
             </form>
         </div>
