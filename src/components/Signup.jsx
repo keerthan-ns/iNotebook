@@ -9,7 +9,8 @@ export default function Signup(props) {
     const [signing, setSigning] = useState(false)
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
     const getUserInfo=async()=>{
-        const response = await fetch("http://localhost:5000/api/auth/getuser",{
+        // const response = await fetch("http://localhost:5000/api/auth/getuser",{
+        const response = await fetch(import.meta.env.VITE_BACKEND_URL+"/api/auth/getuser",{
             method:'POST',
             headers:{
                 'Content-type':'application/json',
@@ -23,7 +24,8 @@ export default function Signup(props) {
     const handleSubmit=async (e)=>{
         setSigning(true)
         e.preventDefault()
-        const response = await fetch("http://localhost:5000/api/auth/createuser",{
+        // const response = await fetch("http://localhost:5000/api/auth/createuser",{
+        const response = await fetch(import.meta.env.VITE_BACKEND_URL+"/api/auth/createuser",{
             method:'POST',
             headers:{
                 'Content-type':'application/json',

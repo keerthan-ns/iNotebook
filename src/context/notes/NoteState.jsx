@@ -3,7 +3,8 @@ import NoteContext from "./noteContext"
 import PropTypes from 'prop-types'
 
 const NoteState = (props) =>{
-    const host = "http://localhost:5000"
+    // const host = "http://localhost:5000"
+    const host = import.meta.env.VITE_BACKEND_URL
     const notesInitial = []
     const [notes, setNotes] = useState(notesInitial)
 
