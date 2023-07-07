@@ -16,14 +16,12 @@ const NoteState = (props) =>{
                 'auth-token': localStorage.getItem("token")
             }
         })
-        const json = await response.json();
-        // console.log(json)
+        const json = await response.json()
         setNotes(json)
     }
 
     // add new note
     const addNote = async (title,description,tag) =>{
-        // console.log("adding new note")
         const response = await fetch(`${host}/api/notes/addnote`,{
             method:'POST',
             headers:{
@@ -37,7 +35,6 @@ const NoteState = (props) =>{
     }
     // delete note
     const deleteNote = async (id) =>{
-        // console.log("deleting "+id)
         const response = await fetch(`${host}/api/notes/deletenote/${id}`,{
             method:'DELETE',
             headers:{

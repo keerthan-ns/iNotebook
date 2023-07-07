@@ -46,7 +46,6 @@ router.post('/createuser',[
             // res.json(user)
         }catch(error){
             // other errors are handled here
-            console.log(error.message)
             res.status(500).send("Internal server error occured")
         }
 
@@ -84,7 +83,6 @@ router.post('/login',[
             res.json({success,authtoken: authtoken})
     }catch(error){
         // other errors are handled here
-        console.log(error.message)
         res.status(500).send("Internal server error occured")
     }
 })
@@ -99,7 +97,6 @@ router.post('/getuser',fetchUser,async (req,res)=>{
         res.send(user)
     }catch(error){
         // other errors are handled here
-        console.log(error.message)
         res.status(500).send("Internal server error occured")
     }
 })

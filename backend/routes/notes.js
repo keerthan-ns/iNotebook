@@ -11,7 +11,6 @@ router.get('/fetchallnotes',fetchUser,async (req,res)=>{
         res.json(notes)
     } catch (error) {
         // other errors are handled here
-        console.log(error.message)
         res.status(500).send("Internal server error occured")
     }
 })
@@ -35,7 +34,6 @@ router.post('/addnote',fetchUser,[
             res.json(savedNote)
         } catch (error) {
             // other errors are handled here
-            console.log(error.message)
             res.status(500).send("Internal server error occured")
         }
 })
@@ -62,7 +60,6 @@ router.put('/updatenote/:id', fetchUser, async (req, res) => {
         res.json({note});
     }catch (error) {
             // other errors are handled here
-            console.log(error.message)
             res.status(500).send("Internal server error occured")
         }
 })
@@ -82,7 +79,6 @@ router.delete('/deletenote/:id', fetchUser, async (req, res) => {
         res.json({"Success":"Note deleted successfully",note:note})
     }catch (error) {
         // other errors are handled here
-        console.log(error.message)
         res.status(500).send("Internal server error occured")
     }
 })

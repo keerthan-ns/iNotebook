@@ -31,7 +31,6 @@ export default function Signup(props) {
             body: JSON.stringify({name:credentials.name,email: credentials.email,password: credentials.password})
         })
         const json = await response.json()
-        console.log(json)
         if(json.success){
             localStorage.setItem("token",json.authtoken)
             await getUserInfo()
