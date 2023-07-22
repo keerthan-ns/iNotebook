@@ -7,7 +7,7 @@ export default function Navbar() {
         document.getElementById('navbar-Compo').classList.toggle("hidden");
     }
     const handleLogout =()=>{
-        localStorage.removeItem("token")
+        localStorage.clear()
         window.location.reload()
     }
     return (
