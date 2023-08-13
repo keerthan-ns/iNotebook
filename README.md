@@ -1,5 +1,12 @@
 # iNotebook
 
+<div>
+<img alt='' src='https://img.shields.io/badge/reactjs-100000?style=for-the-badge&logo=&logoColor=white&labelColor=FFFFFF&color=64008C'/>
+<img alt='' src='https://img.shields.io/badge/reactjs-100000?style=for-the-badge&logo=&logoColor=white&labelColor=FFFFFF&color=64008C'/>
+</div>
+
+
+
 <img src="https://res.cloudinary.com/dg7etzwks/image/upload/v1688753740/portfolioProjects/inotebook_xwsqte.png" alt="Portfolio Output" style="height: 350px; width: auto;" />
 
 iNotebook is a web application that allows users to store their notes in the cloud. Each user is authenticated and can access, create, update, and delete their own notes. iNotebook is built using ViteJS (React), ExpressJS, Node.js, and MongoDB for the database. The application is styled using Tailwind CSS and Flowbite. The frontend is deployed on Vercel, while the backend is deployed on Render.
