@@ -1,6 +1,6 @@
 # iNotebook
 
-<img src="https://res.cloudinary.com/dg7etzwks/image/upload/v1688753740/portfolioProjects/inotebook_xwsqte.png" alt="Portfolio Output" style="height: auto; width: 600px;" />
+<img src="https://res.cloudinary.com/dg7etzwks/image/upload/v1688753740/portfolioProjects/inotebook_xwsqte.png" alt="Portfolio Output" style="height: auto; width: 670px;" />
 
 <div>
   <img alt='' src='https://img.shields.io/badge/mongodb-100?style=for-the-badge&logo=&logoColor=white&labelColor=FFFFFF&color=64008C'/>
